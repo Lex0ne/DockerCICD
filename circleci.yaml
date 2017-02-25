@@ -1,6 +1,8 @@
-machine:
-  services:
-    - docker
+deployment:
+  dockerhub:
+    branch: master
+    commands:
+      - $DOCKER_HUB_TRIGGER
 
 dependencies:
   override:
@@ -10,9 +12,3 @@ test:
   override:
     - docker-compose run -d --no-deps web
     - mocha
-
-deployment:
-  dockerhub:
-    branch: master
-    commands:
-      - $DOCKER_HUB_TRIGGER
