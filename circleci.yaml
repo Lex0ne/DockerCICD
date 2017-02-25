@@ -4,11 +4,6 @@ deployment:
     commands:
       - $DOCKER_HUB_TRIGGER
 
-dependencies:
-  override:
-    - sudo pip install --upgrade docker-compose==1.3.3
-
 test:
   override:
-    - docker-compose run -d --no-deps web
     - mocha
