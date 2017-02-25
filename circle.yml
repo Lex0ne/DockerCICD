@@ -1,11 +1,15 @@
 machine:
   services:
     - docker
+  python:
+    version: 2.7.8
 
 dependencies:
+  pre:
+    - sudo pip install --upgrade docker-compose==1.3.3
   override:
-    - curl -L https://github.com/docker/compose/releases/download/1.11.1/run.sh > /usr/local/bin/docker-compose
-    - chmod +x /usr/local/bin/docker-compose
+    - docker info
+    - docker build -t lexone/dockercicd .
 
 test:
   override:
@@ -13,7 +17,8 @@ test:
     - mocha
 
 deployment:
-  dockerhub:
+  prod:
     branch: master
     commands:
-      - $DOCKER_HUB_TRIGGER
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push lexone/dockercicd
