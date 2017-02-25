@@ -1,15 +1,13 @@
-FROM centos:centos6
+FROM node:latest
 
-MAINTAINER contact@btreepress.com
+RUN mkdir /src
 
-RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+RUN npm install nodemon -g
 
-RUN yum install -y npm
+WORKDIR /src
+ADD . /src
+RUN npm install
 
-COPY . /src
+EXPOSE 3000
 
-RUN cd /src; npm install
-
-EXPOSE 8080
-
-CMD cd /src && node ./app.js
+CMD npm start
