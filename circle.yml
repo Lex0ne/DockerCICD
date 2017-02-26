@@ -15,7 +15,7 @@ dependencies:
 test:
   override:
     - docker-compose run -d --no-deps web
-    - mocha
+    - cd app; mocha
 
 deployment:
   prod:
