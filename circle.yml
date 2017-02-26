@@ -10,7 +10,7 @@ dependencies:
     - sudo pip install docker-compose
   override:
     - docker info
-    - docker build -t lexone/dockercicd ./app
+    - docker build -t lexone/dockercicd .
 
 test:
   override:
